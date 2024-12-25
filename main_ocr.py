@@ -7,6 +7,7 @@ import numpy as np
 from PIL import Image
 import google.generativeai as genai
 from dotenv import load_dotenv
+import easyocr
 
 
 # Load environment variables
@@ -48,17 +49,23 @@ class OCRService:
         
         return gray
 
+
+
+class OCRService:
     @staticmethod
     def perform_ocr(image):
-        """
-        Melakukan OCR menggunakan Tesseract
-        """
         try:
-            # Pra-pemrosesan gambar
-            preprocessed_image = OCRService.preprocess_image(image)
+            # Inisialisasi reader (bisa tambahkan bahasa)
+            reader = easyocr.Reader(['en', 'id'])
+            
+            # Konversi PIL Image ke numpy array
+            img_array = np.array(image)
             
             # Lakukan OCR
-            text = pytesseract.image_to_string(preprocessed_image)
+            results = reader.readtext(img_array)
+            
+            # Gabungkan semua teks
+            text = ' '.join([result[1] for result in results])
             
             return text
         except Exception as e:
