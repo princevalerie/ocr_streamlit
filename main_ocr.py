@@ -196,32 +196,32 @@ class AssetTrackingApp:
                             # Proses dan tampilkan hasil
                             self.process_analysis_result(analysis_result)
 
-        def camera_mode(self, gemini_api_key):
-            picture = st.camera_input("Ambil Gambar Struk")
-            if picture is not None:
-                # Tampilkan gambar yang diambil
-                image = Image.open(picture)
-                st.image(image, caption="Gambar dari Kamera")
-                
-                if st.button("Proses Dokumen"):
-                    with st.spinner("Memproses Dokumen..."):
-                        # Lakukan OCR
-                        ocr_result = OCRService.perform_ocr(image)
+    def camera_mode(self, gemini_api_key):
+        picture = st.camera_input("Ambil Gambar Struk")
+        if picture is not None:
+            # Tampilkan gambar yang diambil
+            image = Image.open(picture)
+            st.image(image, caption="Gambar dari Kamera")
+            
+            if st.button("Proses Dokumen"):
+                with st.spinner("Memproses Dokumen..."):
+                    # Lakukan OCR
+                    ocr_result = OCRService.perform_ocr(image)
+                    
+                    if ocr_result:
+                        # Tampilkan hasil OCR
+                        st.text_area("Hasil OCR", ocr_result, height=200)
                         
-                        if ocr_result:
-                            # Tampilkan hasil OCR
-                            st.text_area("Hasil OCR", ocr_result, height=200)
+                        # Analisis dengan Gemini
+                        analysis_result = AIAnalysisService.analyze_ocr_text(
+                            ocr_result, 
+                            gemini_api_key
+                        )
+                        
+                        if analysis_result:
+                            # Proses dan tampilkan hasil
+                            self.process_analysis_result(analysis_result)
                             
-                            # Analisis dengan Gemini
-                            analysis_result = AIAnalysisService.analyze_ocr_text(
-                                ocr_result, 
-                                gemini_api_key
-                            )
-                            
-                            if analysis_result:
-                                # Proses dan tampilkan hasil
-                                self.process_analysis_result(analysis_result)
-
     def process_analysis_result(self, analysis_result):
         """
         Memproses hasil analisis dan menambahkannya ke tabel sementara
