@@ -20,7 +20,7 @@ Pillow
 opencv-python-headless
 pytesseract
 tesseract
-import easyocr
+easyocr
 
 # AI and Machine Learning
 google-generativeai
