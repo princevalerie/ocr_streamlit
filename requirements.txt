@@ -19,6 +19,7 @@ pandas
 Pillow
 opencv-python-headless
 pytesseract
+tesseract
 
 # AI and Machine Learning
 google-generativeai
