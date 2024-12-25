@@ -1,0 +1,32 @@
+# streamlit
+# pandas
+# google-generativeai
+# pytesseract
+# opencv-python-headless
+# Pillow
+# python-dotenv
+
+
+# Core Python Libraries
+streamlit
+python-dotenv
+
+# Data Manipulation
+numpy
+pandas
+
+# Image Processing
+Pillow
+opencv-python-headless
+pytesseract
+
+# AI and Machine Learning
+google-generativeai
+
+# Optional but Recommended
+streamlit-extras
+matplotlib
+scikit-image
+
+# Debugging and Development
+ipython
