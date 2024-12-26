@@ -132,7 +132,7 @@ class AIAnalysisService:
             - Gunakan tanda kutip tunggal
             - Pisahkan dengan koma TEPAT
             - Tanggal: format YYYY-MM-DD
-            - Nama Item: nama lengkap, hilangkan karakter khusus
+            - Nama Item: nama lengkap, hilangkan karakter khusus namun jika ada tanda kurung yang berupa satuan maka pertahankan
             - Quantity: bilangan bulat positif
             - Harga: bilangan bulat, tanpa simbol mata uang
             - Total Harga: hasil perkalian Quantity * Harga
