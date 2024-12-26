@@ -189,19 +189,38 @@ class AssetTrackingApp:
             num_rows="dynamic"
         )
 
+        # Buat kolom untuk tombol
+        col1, col2 = st.columns(2)
+
         # Tombol simpan ke tabel permanen
-        if st.button("Simpan ke Tabel Permanen"):
-            st.session_state.asset_table = pd.concat([
-                st.session_state.asset_table, 
-                edited_table
-            ], ignore_index=True)
-            
-            # Reset tabel sementara
-            st.session_state.temp_table = pd.DataFrame(columns=[
-                'Tanggal Beli', 'Nama Item', 'Quantity', 'Harga', 'Total Harga'
-            ])
-            
-            st.success("Data berhasil disimpan!")
+        with col1:
+            if st.button("Simpan ke Tabel Permanen"):
+                st.session_state.asset_table = pd.concat([
+                    st.session_state.asset_table, 
+                    edited_table
+                ], ignore_index=True)
+                
+                # Reset tabel sementara
+                st.session_state.temp_table = pd.DataFrame(columns=[
+                    'Tanggal Beli', 'Nama Item', 'Quantity', 'Harga', 'Total Harga'
+                ])
+                
+                st.success("Data berhasil disimpan!")
+
+        # Tombol reset tabel sementara
+        with col2:
+            if st.button("Reset Tabel Sementara", type="primary"):
+                # Konfirmasi reset
+                confirm = st.checkbox("Yakin ingin mereset tabel sementara?")
+                
+                if confirm:
+                    # Reset tabel sementara
+                    st.session_state.temp_table = pd.DataFrame(columns=[
+                        'Tanggal Beli', 'Nama Item', 'Quantity', 'Harga', 'Total Harga'
+                    ])
+                    
+                    st.success("Tabel sementara berhasil direset!")
+                    st.experimental_rerun()
 
         # Tampilkan tabel permanen
         st.subheader("Tabel Aset Permanen")
