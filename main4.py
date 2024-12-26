@@ -55,7 +55,7 @@ class OCRService:
             Catatan Penting:
             - Gunakan format numerik yang bersih
             - Pertahankan tanda kurung pada nama item
-            - Jika pada quantity terdapat string yang merupakan jenis satuan maka pindahkan ke setelah nama item dan selalu berikan tanda kurung ex:Paku (kg)
+            - Jika pada quantity terdapat string yang merupakan jenis satuan maka pindahkan pada huruf terakhir di nama item dan selalu berikan tanda kurung ex:Paku (kg)
             - Hilangkan simbol mata uang
             - Jika informasi tidak ditemukan, gunakan 'N/A'
             - Prioritaskan keakuratan data
