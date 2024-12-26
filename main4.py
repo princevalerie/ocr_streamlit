@@ -168,12 +168,12 @@ class AssetTrackingApp:
         
         # Input API Key
         gemini_api_key = os.getenv('GEMINI_API_KEY')
-
+    
         # Pilih mode input
         mode = st.selectbox("Pilih Mode Input", 
             ["Upload Gambar", "Input Manual", "Scan Kamera"]
         )
-
+    
         # Proses berdasarkan mode
         if mode == "Upload Gambar" and gemini_api_key:
             self.upload_image_mode(gemini_api_key)
@@ -181,29 +181,42 @@ class AssetTrackingApp:
             self.manual_input_mode()
         elif mode == "Scan Kamera" and gemini_api_key:
             self.camera_scan_mode(gemini_api_key)
-
+    
         # Tampilkan tabel sementara
         st.subheader("Tabel Data Sementara")
         
-        # Tambahkan kolom aksi reset
-        col_reset = st.columns(1)[0]
-        with col_reset:
-            if st.button("🗑️ Reset Tabel Sementara", type="primary"):
-                # Reset langsung tanpa konfirmasi tambahan
-                st.session_state.temp_table = pd.DataFrame(columns=[
-                    'Tanggal Beli', 'Nama Item', 'Quantity', 'Harga', 'Total Harga'
-                ])
-                st.success("Tabel sementara berhasil direset!")
-                st.experimental_rerun()
-
+        # Kolom untuk tombol reset
+        col1, col2 = st.columns([3, 1])
+        
+        with col2:
+            # Tombol reset tabel sementara dengan konfirmasi
+            if st.button("🗑️ Reset Tabel", type="primary"):
+                # Tampilkan modal konfirmasi
+                with st.expander("Konfirmasi Reset"):
+                    st.warning("Apakah Anda yakin ingin mereset tabel sementara?")
+                    
+                    # Tombol konfirmasi
+                    if st.button("Ya, Reset Tabel"):
+                        # Reset HANYA tabel sementara
+                        st.session_state.temp_table = pd.DataFrame(columns=[
+                            'Tanggal Beli', 'Nama Item', 'Quantity', 'Harga', 'Total Harga'
+                        ])
+                        st.success("Tabel sementara berhasil direset!")
+                    
+                    # Tombol batal
+                    if st.button("Batal"):
+                        st.stop()
+        
         # Edit tabel dengan opsi dinamis
-        edited_table = st.data_editor(
-            st.session_state.temp_table, 
-            num_rows="dynamic"
-        )
-
+        with col1:
+            edited_table = st.data_editor(
+                st.session_state.temp_table, 
+                num_rows="dynamic"
+            )
+    
         # Tombol simpan ke tabel permanen
         if st.button("Simpan ke Tabel Permanen"):
+            # Gabungkan tabel permanen dengan data yang diedit
             st.session_state.asset_table = pd.concat([
                 st.session_state.asset_table, 
                 edited_table
@@ -215,10 +228,22 @@ class AssetTrackingApp:
             ])
             
             st.success("Data berhasil disimpan!")
-
+    
         # Tampilkan tabel permanen
         st.subheader("Tabel Aset Permanen")
         st.dataframe(st.session_state.asset_table)
+    
+        # Tambahan: Tombol hapus tabel permanen (opsional)
+        if st.checkbox("Tampilkan opsi hapus tabel permanen"):
+            if st.button("🗑️ Hapus Seluruh Tabel Permanen", type="primary"):
+                # Konfirmasi sebelum menghapus
+                confirm = st.checkbox("Saya yakin ingin menghapus SELURUH tabel permanen")
+                
+                if confirm:
+                    st.session_state.asset_table = pd.DataFrame(columns=[
+                        'Tanggal Beli', 'Nama Item', 'Quantity', 'Harga', 'Total Harga'
+                    ])
+                    st.warning("Seluruh tabel permanen telah dihapus!")
 
     def upload_image_mode(self, gemini_api_key):
         uploaded_file = st.file_uploader(
