@@ -121,9 +121,8 @@ class OCRService:
             - Vendor (Nama toko/tempat)
 
             Aturan Jenis Satuan:
-            - Identifikasi satuan yang paling sesuai dengan produk
             - Gunakan satuan umum yang ada di struk
-            - Jika tidak ada, gunakan 'pcs' sebagai default
+            - Jika tidak ada, tuliskan N/A
             - Pastikan satuan sesuai dengan jenis produk
 
             Catatan Penting:
@@ -131,6 +130,7 @@ class OCRService:
             - Konversi pecahan (mis. 1/2 → 0.5)
             - Hilangkan simbol mata uang
             - Prioritaskan keakuratan data
+            - Jika tidak ada informasi tuliskan N/A
             """
             
             # Proses gambar
