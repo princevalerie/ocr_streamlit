@@ -130,7 +130,6 @@ class OCRService:
             - Konversi pecahan (mis. 1/2 → 0.5)
             - Hilangkan simbol mata uang
             - Prioritaskan keakuratan data
-            - Jika Nama Item tidak ada berikan saja nomor nota
             - Jika yang lain tidak ada, tuliskan N/A
             """
             
@@ -171,7 +170,7 @@ class AIAnalysisService:
             - Gunakan tanda kutip tunggal
             - Pisahkan dengan koma TEPAT
             - Tanggal: format YYYY-MM-DD
-            - Nama Item: nama lengkap, hilangkan karakter khusus (apabila nama item berbentuk angka maka berikan tambahan Nota,example:Nota 119)
+            - Nama Item: nama lengkap, hilangkan karakter khusus 
             - Quantity: bilangan desimal (konversi pecahan)
             - Jenis Satuan: satuan yang sesuai dengan produk (pcs, kg, meter, dll)
             - Harga: bilangan bulat, tanpa simbol mata uang
