@@ -130,7 +130,7 @@ class OCRService:
             - Konversi pecahan (mis. 1/2 → 0.5)
             - Hilangkan simbol mata uang
             - Prioritaskan keakuratan data
-            - Jika Nama Item tidak ada berikan saja Item 1,2,3
+            - Jika Nama Item tidak ada berikan saja nomor nota
             - Jika yang lain tidak ada, tuliskan N/A
             """
             
