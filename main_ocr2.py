@@ -171,7 +171,7 @@ class AIAnalysisService:
             - Gunakan tanda kutip tunggal
             - Pisahkan dengan koma TEPAT
             - Tanggal: format YYYY-MM-DD
-            - Nama Item: nama lengkap, hilangkan karakter khusus
+            - Nama Item: nama lengkap, hilangkan karakter khusus (apabila nama item berbentuk angka maka berikan tambahan Nota,example:Nota 119)
             - Quantity: bilangan desimal (konversi pecahan)
             - Jenis Satuan: satuan yang sesuai dengan produk (pcs, kg, meter, dll)
             - Harga: bilangan bulat, tanpa simbol mata uang
