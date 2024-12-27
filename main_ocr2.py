@@ -184,6 +184,7 @@ class AIAnalysisService:
             - Kembalikan HANYA data dalam format CSV
             - Jangan tambahkan penjelasan atau komentar
             - Prioritaskan presisi dan konsistensi
+            - Apabila banyak N/A tetap masukkan ke tabel
             """
             
             response = model.generate_content(prompt)
